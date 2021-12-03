@@ -5,6 +5,20 @@ import {Component} from 'react'
 class Speedometer extends Component {
   state = {speed: 0}
 
+  addSpeed = () => {
+    const {speed} = this.state
+    if (speed < 200) {
+      this.setState(prevObj => ({speed: prevObj.speed + 10}))
+    }
+  }
+
+  decSpeed = () => {
+    const {speed} = this.state
+    if (speed > 0) {
+      this.setState(prevObj => ({speed: prevObj.speed - 10}))
+    }
+  }
+
   render() {
     const {speed} = this.state
     return (
@@ -18,8 +32,12 @@ class Speedometer extends Component {
         <h2 className="heading2">Speed is {speed}mph</h2>
         <p className="paragraph">Min Limit is 0mph, Max Limit is 200mph</p>
         <div>
-          <button className="accelButton">Accelerate</button>
-          <button className="brakeButton">Apply Brake</button>
+          <button onClick={this.addSpeed} className="accelButton">
+            Accelerate
+          </button>
+          <button onClick={this.decSpeed} className="brakeButton">
+            Apply Brake
+          </button>
         </div>
       </div>
     )
